@@ -87,6 +87,14 @@
                 <label for="position">Position</label>
                 <input type="text" id="position" name="position" required>
             </div>
+            <div class="form-group">
+                <label for="resume">Resume (PDF)</label>
+                <input type="file" id="resume" name="resume" accept=".pdf">
+            </div>
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+            </div>
             <button type="submit">Register</button>
         </form>
         
@@ -106,7 +114,9 @@
                 phone: document.getElementById('phone').value,
                 department: document.getElementById('department').value,
                 position: document.getElementById('position').value,
-                id: Date.now()
+                id: Date.now(),
+                resume: document.getElementById('resume').files[0] ? document.getElementById('resume').files[0].name : null,
+                photo: document.getElementById('photo').files[0] ? document.getElementById('photo').files[0].name : null
             };
             
             // Get existing employees from localStorage or initialize empty array
@@ -131,7 +141,9 @@
                 li.innerHTML = `
                     <strong>${employee.name}</strong> - ${employee.position} (${employee.department})<br>
                     Email: ${employee.email}<br>
-                    Phone: ${employee.phone}
+                    Phone: ${employee.phone}<br>
+                    ${employee.resume ? 'Resume: ' + employee.resume : ''}<br>
+                    ${employee.photo ? 'Photo: ' + employee.photo : ''}
                 `;
                 employeesList.appendChild(li);
             });
